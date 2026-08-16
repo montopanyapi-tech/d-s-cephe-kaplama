@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Montopan Bina Cephe Visualizer v13</title>
+<title>Montopan Bina Cephe Visualizer v14</title>
 
 <style>
 
@@ -28,8 +28,8 @@ body {
     max-width: 1250px;
     margin: auto;
     background: #1e293b;
-    padding: 18px;
-    border-radius: 14px;
+    padding: 10px;
+    border-radius: 12px;
     box-shadow: 0 10px 35px rgba(0,0,0,0.45);
 }
 
@@ -38,52 +38,70 @@ body {
 #info-bar {
     background: #0f172a;
     border: 1px solid #334155;
-    border-radius: 10px;
-    padding: 13px 18px;
-    margin-bottom: 14px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    gap: 10px;
 }
 
 .info-text {
     color: #cbd5e1;
-    font-size: 14px;
+    font-size: 11px;
 }
 
 .info-text strong {
     color: #38bdf8;
 }
 
-/* PANEL KONTROLLERİ */
+/* =====================================================
+   VISUALIZER ANA ALANI
+   SOL = KONTROLLER
+   SAĞ = BİNA
+===================================================== */
+
+#visualizer-workspace {
+    display: grid;
+    grid-template-columns: 205px minmax(0, 1fr);
+    gap: 8px;
+    align-items: start;
+}
+
+/* =====================================================
+   SOL KONTROL ALANI
+===================================================== */
 
 #controls {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    min-width: 0;
 }
 
 .control-card {
     background: #0f172a;
     border: 1px solid #334155;
-    border-radius: 10px;
-    padding: 13px;
+    border-radius: 7px;
+    padding: 7px;
 }
 
 .control-title {
     font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 10px;
+    font-size: 11px;
+    line-height: 1.2;
+    margin-bottom: 6px;
     color: #f8fafc;
 }
 
 .control-row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 4px;
+    flex-wrap: nowrap;
 }
 
 input[type="file"] {
@@ -92,15 +110,15 @@ input[type="file"] {
 
 .file-button {
     display: inline-block;
-    padding: 9px 13px;
+    padding: 5px 7px;
     background: #334155;
     border: 1px dashed #38bdf8;
-    border-radius: 6px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
     font-weight: 600;
-    font-size: 13px;
-    transition: 0.2s;
+    font-size: 10px;
+    white-space: nowrap;
 }
 
 .file-button:hover {
@@ -112,11 +130,12 @@ input[type="file"] {
     border: none;
     background: #dc2626;
     color: white;
-    padding: 9px 12px;
-    border-radius: 6px;
+    padding: 5px 7px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 10px;
+    white-space: nowrap;
 }
 
 .clear-button:hover {
@@ -125,60 +144,70 @@ input[type="file"] {
 
 .file-name {
     color: #94a3b8;
-    font-size: 12px;
-    max-width: 170px;
+    font-size: 9px;
+    flex: 1;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* ÖLÇEK */
+/* =====================================================
+   ÖLÇEK
+===================================================== */
 
 .scale-row {
     display: flex;
     align-items: center;
-    gap: 9px;
-    margin-top: 10px;
+    gap: 5px;
+    margin-top: 6px;
     color: #94a3b8;
-    font-size: 12px;
+    font-size: 9px;
 }
 
 .scale-row input {
     flex: 1;
+    min-width: 0;
     cursor: pointer;
 }
 
 .scale-value {
     color: #38bdf8;
     font-weight: bold;
-    min-width: 42px;
+    min-width: 31px;
     text-align: right;
+    font-size: 9px;
 }
 
-/* GERİ DÖN */
+/* =====================================================
+   GERİ DÖN
+===================================================== */
 
 #back-button {
     background: #ef4444;
     color: white;
     border: none;
-    border-radius: 7px;
-    padding: 10px 17px;
+    border-radius: 6px;
+    padding: 6px 10px;
     font-weight: bold;
     cursor: pointer;
     white-space: nowrap;
+    font-size: 11px;
 }
 
 #back-button:hover {
     background: #b91c1c;
 }
 
-/* SAHNE */
+/* =====================================================
+   SAHNE
+===================================================== */
 
 #stage-wrapper {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 9px;
+    border-radius: 8px;
     border: 1px solid #334155;
     background: #020617;
 }
@@ -191,14 +220,7 @@ input[type="file"] {
     height: auto;
 }
 
-/*
-SVG KAPLAMA SİSTEMİ
-
-SVG'nin viewBox'ı doğrudan house.jpg
-ölçüsüne göre hazırlanmıştır.
-
-2047 x 1364
-*/
+/* SVG */
 
 #visualizer-svg {
     position: absolute;
@@ -208,19 +230,48 @@ SVG'nin viewBox'ı doğrudan house.jpg
     pointer-events: none;
 }
 
-/* PANEL GÖRÜNÜMÜ */
+/* PANEL */
 
 .panel-rect {
     mix-blend-mode: multiply;
     opacity: 0.88;
 }
 
-/* MOBİL */
+/* =====================================================
+   TABLET
+===================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
+
+    #visualizer-workspace {
+        grid-template-columns: 180px minmax(0, 1fr);
+    }
+
+    .control-title {
+        font-size: 10px;
+    }
+
+    .file-button,
+    .clear-button {
+        font-size: 9px;
+        padding: 5px 6px;
+    }
+}
+
+/* =====================================================
+   MOBİL
+===================================================== */
+
+@media (max-width: 700px) {
+
+    #visualizer-workspace {
+        grid-template-columns: 1fr;
+    }
 
     #controls {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
     }
 
     #info-bar {
@@ -231,7 +282,13 @@ SVG'nin viewBox'ı doğrudan house.jpg
     #back-button {
         width: 100%;
     }
+}
 
+@media (max-width: 430px) {
+
+    #controls {
+        grid-template-columns: 1fr;
+    }
 }
 
 </style>
@@ -241,7 +298,9 @@ SVG'nin viewBox'ı doğrudan house.jpg
 
 <div id="app-wrapper">
 
-    <!-- ÜST BİLGİ -->
+    <!-- =================================================
+         ÜST BİLGİ
+    ================================================== -->
 
     <div id="info-bar">
 
@@ -257,676 +316,664 @@ SVG'nin viewBox'ı doğrudan house.jpg
     </div>
 
 
-    <!-- PANEL KONTROLLERİ -->
+    <!-- =================================================
+         VISUALIZER ALANI
+    ================================================== -->
 
-    <div id="controls">
+    <div id="visualizer-workspace">
 
-        <!-- PANEL 1 -->
 
-        <div class="control-card">
+        <!-- =================================================
+             SOL KONTROLLER
+        ================================================== -->
 
-            <div class="control-title">
-                🧱 Panel 1 — Sol Cephe
+        <div id="controls">
+
+
+            <!-- PANEL 1 -->
+
+            <div class="control-card">
+
+                <div class="control-title">
+                    🧱 Panel 1 — Sol Cephe
+                </div>
+
+                <div class="control-row">
+
+                    <label for="panel1" class="file-button">
+                        📁 Seç
+                    </label>
+
+                    <input
+                        type="file"
+                        id="panel1"
+                        accept="image/*"
+                        data-panel="1"
+                    >
+
+                    <span id="name1" class="file-name">
+                        Seçilmedi
+                    </span>
+
+                    <button
+                        class="clear-button"
+                        onclick="clearPanel(1)"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+                <div class="scale-row">
+
+                    <span>Ölçek</span>
+
+                    <input
+                        type="range"
+                        id="scale1"
+                        min="60"
+                        max="260"
+                        value="125"
+                        oninput="changeScale(1)"
+                    >
+
+                    <span
+                        id="scaleValue1"
+                        class="scale-value"
+                    >
+                        125px
+                    </span>
+
+                </div>
+
             </div>
 
-            <div class="control-row">
 
-                <label for="panel1" class="file-button">
-                    📁 Panel Seç
-                </label>
+            <!-- PANEL 2 -->
 
-                <input
-                    type="file"
-                    id="panel1"
-                    accept="image/*"
-                    data-panel="1"
-                >
+            <div class="control-card">
 
-                <span id="name1" class="file-name">
-                    Panel seçilmedi
-                </span>
+                <div class="control-title">
+                    🧱 Panel 2 — Sağ Cephe
+                </div>
 
-                <button
-                    class="clear-button"
-                    onclick="clearPanel(1)"
-                >
-                    🗑 Temizle
-                </button>
+                <div class="control-row">
+
+                    <label for="panel2" class="file-button">
+                        📁 Seç
+                    </label>
+
+                    <input
+                        type="file"
+                        id="panel2"
+                        accept="image/*"
+                        data-panel="2"
+                    >
+
+                    <span id="name2" class="file-name">
+                        Seçilmedi
+                    </span>
+
+                    <button
+                        class="clear-button"
+                        onclick="clearPanel(2)"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+                <div class="scale-row">
+
+                    <span>Ölçek</span>
+
+                    <input
+                        type="range"
+                        id="scale2"
+                        min="60"
+                        max="260"
+                        value="125"
+                        oninput="changeScale(2)"
+                    >
+
+                    <span
+                        id="scaleValue2"
+                        class="scale-value"
+                    >
+                        125px
+                    </span>
+
+                </div>
 
             </div>
 
-            <div class="scale-row">
 
-                <span>Ölçek</span>
+            <!-- PANEL 3 -->
 
-                <input
-                    type="range"
-                    id="scale1"
-                    min="60"
-                    max="260"
-                    value="125"
-                    oninput="changeScale(1)"
-                >
+            <div class="control-card">
 
-                <span
-                    id="scaleValue1"
-                    class="scale-value"
-                >
-                    125px
-                </span>
+                <div class="control-title">
+                    🏠 Panel 3 — Sol Balkonlar
+                </div>
+
+                <div class="control-row">
+
+                    <label for="panel3" class="file-button">
+                        📁 Seç
+                    </label>
+
+                    <input
+                        type="file"
+                        id="panel3"
+                        accept="image/*"
+                        data-panel="3"
+                    >
+
+                    <span id="name3" class="file-name">
+                        Seçilmedi
+                    </span>
+
+                    <button
+                        class="clear-button"
+                        onclick="clearPanel(3)"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+                <div class="scale-row">
+
+                    <span>Ölçek</span>
+
+                    <input
+                        type="range"
+                        id="scale3"
+                        min="60"
+                        max="260"
+                        value="110"
+                        oninput="changeScale(3)"
+                    >
+
+                    <span
+                        id="scaleValue3"
+                        class="scale-value"
+                    >
+                        110px
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PANEL 4 -->
+
+            <div class="control-card">
+
+                <div class="control-title">
+                    🏠 Panel 4 — Sağ Balkonlar
+                </div>
+
+                <div class="control-row">
+
+                    <label for="panel4" class="file-button">
+                        📁 Seç
+                    </label>
+
+                    <input
+                        type="file"
+                        id="panel4"
+                        accept="image/*"
+                        data-panel="4"
+                    >
+
+                    <span id="name4" class="file-name">
+                        Seçilmedi
+                    </span>
+
+                    <button
+                        class="clear-button"
+                        onclick="clearPanel(4)"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+                <div class="scale-row">
+
+                    <span>Ölçek</span>
+
+                    <input
+                        type="range"
+                        id="scale4"
+                        min="60"
+                        max="260"
+                        value="110"
+                        oninput="changeScale(4)"
+                    >
+
+                    <span
+                        id="scaleValue4"
+                        class="scale-value"
+                    >
+                        110px
+                    </span>
+
+                </div>
 
             </div>
 
         </div>
 
 
-        <!-- PANEL 2 -->
+        <!-- =================================================
+             BİNA
+        ================================================== -->
 
-        <div class="control-card">
+        <div id="stage-wrapper">
 
-            <div class="control-title">
-                🧱 Panel 2 — Sağ Cephe
-            </div>
-
-            <div class="control-row">
-
-                <label for="panel2" class="file-button">
-                    📁 Panel Seç
-                </label>
-
-                <input
-                    type="file"
-                    id="panel2"
-                    accept="image/*"
-                    data-panel="2"
-                >
-
-                <span id="name2" class="file-name">
-                    Panel seçilmedi
-                </span>
-
-                <button
-                    class="clear-button"
-                    onclick="clearPanel(2)"
-                >
-                    🗑 Temizle
-                </button>
-
-            </div>
-
-            <div class="scale-row">
-
-                <span>Ölçek</span>
-
-                <input
-                    type="range"
-                    id="scale2"
-                    min="60"
-                    max="260"
-                    value="125"
-                    oninput="changeScale(2)"
-                >
-
-                <span
-                    id="scaleValue2"
-                    class="scale-value"
-                >
-                    125px
-                </span>
-
-            </div>
-
-        </div>
+            <img
+                src="house.jpg"
+                id="base-house"
+                alt="Montopan Bina"
+            >
 
 
-        <!-- PANEL 3 -->
+            <svg
+                id="visualizer-svg"
+                viewBox="0 0 2047 1364"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
 
-        <div class="control-card">
-
-            <div class="control-title">
-                🏠 Panel 3 — Sol Balkonlar
-            </div>
-
-            <div class="control-row">
-
-                <label for="panel3" class="file-button">
-                    📁 Panel Seç
-                </label>
-
-                <input
-                    type="file"
-                    id="panel3"
-                    accept="image/*"
-                    data-panel="3"
-                >
-
-                <span id="name3" class="file-name">
-                    Panel seçilmedi
-                </span>
-
-                <button
-                    class="clear-button"
-                    onclick="clearPanel(3)"
-                >
-                    🗑 Temizle
-                </button>
-
-            </div>
-
-            <div class="scale-row">
-
-                <span>Ölçek</span>
-
-                <input
-                    type="range"
-                    id="scale3"
-                    min="60"
-                    max="260"
-                    value="110"
-                    oninput="changeScale(3)"
-                >
-
-                <span
-                    id="scaleValue3"
-                    class="scale-value"
-                >
-                    110px
-                </span>
-
-            </div>
-
-        </div>
+                <defs>
 
 
-        <!-- PANEL 4 -->
+                    <!-- =================================================
+                         PANEL DESENLERİ
+                    ================================================== -->
 
-        <div class="control-card">
-
-            <div class="control-title">
-                🏠 Panel 4 — Sağ Balkonlar
-            </div>
-
-            <div class="control-row">
-
-                <label for="panel4" class="file-button">
-                    📁 Panel Seç
-                </label>
-
-                <input
-                    type="file"
-                    id="panel4"
-                    accept="image/*"
-                    data-panel="4"
-                >
-
-                <span id="name4" class="file-name">
-                    Panel seçilmedi
-                </span>
-
-                <button
-                    class="clear-button"
-                    onclick="clearPanel(4)"
-                >
-                    🗑 Temizle
-                </button>
-
-            </div>
-
-            <div class="scale-row">
-
-                <span>Ölçek</span>
-
-                <input
-                    type="range"
-                    id="scale4"
-                    min="60"
-                    max="260"
-                    value="110"
-                    oninput="changeScale(4)"
-                >
-
-                <span
-                    id="scaleValue4"
-                    class="scale-value"
-                >
-                    110px
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SAHNE -->
-
-    <div id="stage-wrapper">
-
-        <img
-            src="house.jpg"
-            id="base-house"
-            alt="Montopan Bina"
-        >
-
-
-        <!--
-        SVG KAPLAMA ALANI
-
-        Buradaki maskeler binanın gerçek
-        duvar bölgelerine göre hazırlanmıştır.
-        -->
-
-        <svg
-            id="visualizer-svg"
-            viewBox="0 0 2047 1364"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-
-            <defs>
-
-
-                <!-- ========================= -->
-                <!-- PANEL DESENLERİ            -->
-                <!-- ========================= -->
-
-                <pattern
-                    id="pattern1"
-                    patternUnits="userSpaceOnUse"
-                    width="125"
-                    height="125"
-                >
-                    <image
-                        id="patternImage1"
-                        href=""
-                        x="0"
-                        y="0"
+                    <pattern
+                        id="pattern1"
+                        patternUnits="userSpaceOnUse"
                         width="125"
                         height="125"
-                        preserveAspectRatio="xMidYMid slice"
-                    />
-                </pattern>
+                    >
+
+                        <image
+                            id="patternImage1"
+                            href=""
+                            x="0"
+                            y="0"
+                            width="125"
+                            height="125"
+                            preserveAspectRatio="xMidYMid slice"
+                        />
+
+                    </pattern>
 
 
-                <pattern
-                    id="pattern2"
-                    patternUnits="userSpaceOnUse"
-                    width="125"
-                    height="125"
-                >
-                    <image
-                        id="patternImage2"
-                        href=""
-                        x="0"
-                        y="0"
+                    <pattern
+                        id="pattern2"
+                        patternUnits="userSpaceOnUse"
                         width="125"
                         height="125"
-                        preserveAspectRatio="xMidYMid slice"
-                    />
-                </pattern>
+                    >
+
+                        <image
+                            id="patternImage2"
+                            href=""
+                            x="0"
+                            y="0"
+                            width="125"
+                            height="125"
+                            preserveAspectRatio="xMidYMid slice"
+                        />
+
+                    </pattern>
 
 
-                <pattern
-                    id="pattern3"
-                    patternUnits="userSpaceOnUse"
-                    width="110"
-                    height="110"
-                >
-                    <image
-                        id="patternImage3"
-                        href=""
-                        x="0"
-                        y="0"
+                    <pattern
+                        id="pattern3"
+                        patternUnits="userSpaceOnUse"
                         width="110"
                         height="110"
-                        preserveAspectRatio="xMidYMid slice"
-                    />
-                </pattern>
+                    >
+
+                        <image
+                            id="patternImage3"
+                            href=""
+                            x="0"
+                            y="0"
+                            width="110"
+                            height="110"
+                            preserveAspectRatio="xMidYMid slice"
+                        />
+
+                    </pattern>
 
 
-                <pattern
-                    id="pattern4"
-                    patternUnits="userSpaceOnUse"
-                    width="110"
-                    height="110"
-                >
-                    <image
-                        id="patternImage4"
-                        href=""
-                        x="0"
-                        y="0"
+                    <pattern
+                        id="pattern4"
+                        patternUnits="userSpaceOnUse"
                         width="110"
                         height="110"
-                        preserveAspectRatio="xMidYMid slice"
-                    />
-                </pattern>
+                    >
+
+                        <image
+                            id="patternImage4"
+                            href=""
+                            x="0"
+                            y="0"
+                            width="110"
+                            height="110"
+                            preserveAspectRatio="xMidYMid slice"
+                        />
+
+                    </pattern>
 
 
-                <!-- ========================= -->
-                <!-- SOL CEPHE MASKESİ          -->
-                <!-- ========================= -->
+                    <!-- =================================================
+                         SOL CEPHE MASKESİ
+                    ================================================== -->
 
-                <mask
-                    id="maskLeft"
-                    maskUnits="userSpaceOnUse"
+                    <mask
+                        id="maskLeft"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="2047"
+                        height="1364"
+                    >
+
+                        <rect
+                            x="145"
+                            y="175"
+                            width="425"
+                            height="950"
+                            fill="white"
+                        />
+
+                        <!--
+                            PENCERELER
+                            Maskeler 4px içeri alındı.
+                            Panelin pencere çerçevesine
+                            daha fazla yaklaşmasını sağlar.
+                        -->
+
+                        <rect
+                            x="324"
+                            y="239"
+                            width="157"
+                            height="142"
+                            fill="black"
+                        />
+
+                        <rect
+                            x="324"
+                            y="559"
+                            width="157"
+                            height="147"
+                            fill="black"
+                        />
+
+                        <rect
+                            x="324"
+                            y="869"
+                            width="157"
+                            height="147"
+                            fill="black"
+                        />
+
+                    </mask>
+
+
+                    <!-- =================================================
+                         SAĞ CEPHE MASKESİ
+                    ================================================== -->
+
+                    <mask
+                        id="maskRight"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="2047"
+                        height="1364"
+                    >
+
+                        <rect
+                            x="1475"
+                            y="175"
+                            width="425"
+                            height="950"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="1544"
+                            y="239"
+                            width="157"
+                            height="142"
+                            fill="black"
+                        />
+
+                        <rect
+                            x="1544"
+                            y="559"
+                            width="157"
+                            height="147"
+                            fill="black"
+                        />
+
+                        <rect
+                            x="1544"
+                            y="869"
+                            width="157"
+                            height="147"
+                            fill="black"
+                        />
+
+                    </mask>
+
+
+                    <!-- =================================================
+                         SOL BALKON MASKESİ
+                    ================================================== -->
+
+                    <mask
+                        id="maskBalconyLeft"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="2047"
+                        height="1364"
+                    >
+
+                        <rect
+                            x="560"
+                            y="260"
+                            width="365"
+                            height="125"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="674"
+                            y="304"
+                            width="172"
+                            height="77"
+                            fill="black"
+                        />
+
+
+                        <rect
+                            x="560"
+                            y="515"
+                            width="365"
+                            height="165"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="674"
+                            y="579"
+                            width="172"
+                            height="97"
+                            fill="black"
+                        />
+
+
+                        <rect
+                            x="560"
+                            y="785"
+                            width="365"
+                            height="190"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="674"
+                            y="849"
+                            width="172"
+                            height="122"
+                            fill="black"
+                        />
+
+                    </mask>
+
+
+                    <!-- =================================================
+                         SAĞ BALKON MASKESİ
+                    ================================================== -->
+
+                    <mask
+                        id="maskBalconyRight"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="2047"
+                        height="1364"
+                    >
+
+                        <rect
+                            x="1120"
+                            y="260"
+                            width="365"
+                            height="125"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="1189"
+                            y="304"
+                            width="172"
+                            height="77"
+                            fill="black"
+                        />
+
+
+                        <rect
+                            x="1120"
+                            y="515"
+                            width="365"
+                            height="165"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="1189"
+                            y="579"
+                            width="172"
+                            height="97"
+                            fill="black"
+                        />
+
+
+                        <rect
+                            x="1120"
+                            y="785"
+                            width="365"
+                            height="190"
+                            fill="white"
+                        />
+
+                        <rect
+                            x="1189"
+                            y="849"
+                            width="172"
+                            height="122"
+                            fill="black"
+                        />
+
+                    </mask>
+
+                </defs>
+
+
+                <!-- PANEL 1 -->
+
+                <rect
+                    id="overlay1"
+                    class="panel-rect"
                     x="0"
                     y="0"
                     width="2047"
                     height="1364"
-                >
-
-                    <!-- ANA DUVAR -->
-
-                    <rect
-                        x="145"
-                        y="175"
-                        width="425"
-                        height="950"
-                        fill="white"
-                    />
-
-                    <!-- SOL CEPHE PENCERELERİ -->
-
-                    <rect
-                        x="320"
-                        y="235"
-                        width="165"
-                        height="150"
-                        fill="black"
-                    />
-
-                    <rect
-                        x="320"
-                        y="555"
-                        width="165"
-                        height="155"
-                        fill="black"
-                    />
-
-                    <rect
-                        x="320"
-                        y="865"
-                        width="165"
-                        height="155"
-                        fill="black"
-                    />
-
-                </mask>
+                    fill="url(#pattern1)"
+                    mask="url(#maskLeft)"
+                    visibility="hidden"
+                />
 
 
-                <!-- ========================= -->
-                <!-- SAĞ CEPHE MASKESİ          -->
-                <!-- ========================= -->
+                <!-- PANEL 2 -->
 
-                <mask
-                    id="maskRight"
-                    maskUnits="userSpaceOnUse"
+                <rect
+                    id="overlay2"
+                    class="panel-rect"
                     x="0"
                     y="0"
                     width="2047"
                     height="1364"
-                >
-
-                    <!-- ANA DUVAR -->
-
-                    <rect
-                        x="1475"
-                        y="175"
-                        width="425"
-                        height="950"
-                        fill="white"
-                    />
-
-                    <!-- SAĞ CEPHE PENCERELERİ -->
-
-                    <rect
-                        x="1540"
-                        y="235"
-                        width="165"
-                        height="150"
-                        fill="black"
-                    />
-
-                    <rect
-                        x="1540"
-                        y="555"
-                        width="165"
-                        height="155"
-                        fill="black"
-                    />
-
-                    <rect
-                        x="1540"
-                        y="865"
-                        width="165"
-                        height="155"
-                        fill="black"
-                    />
-
-                </mask>
+                    fill="url(#pattern2)"
+                    mask="url(#maskRight)"
+                    visibility="hidden"
+                />
 
 
-                <!-- ========================= -->
-                <!-- SOL BALKON MASKESİ          -->
-                <!-- ========================= -->
+                <!-- PANEL 3 -->
 
-                <mask
-                    id="maskBalconyLeft"
-                    maskUnits="userSpaceOnUse"
+                <rect
+                    id="overlay3"
+                    class="panel-rect"
                     x="0"
                     y="0"
                     width="2047"
                     height="1364"
-                >
-
-                    <!-- 1. KAT BALKON ARKA DUVARI -->
-
-                    <rect
-                        x="560"
-                        y="260"
-                        width="365"
-                        height="125"
-                        fill="white"
-                    />
-
-                    <!-- PENCERE -->
-
-                    <rect
-                        x="670"
-                        y="300"
-                        width="180"
-                        height="85"
-                        fill="black"
-                    />
+                    fill="url(#pattern3)"
+                    mask="url(#maskBalconyLeft)"
+                    visibility="hidden"
+                />
 
 
-                    <!-- 2. KAT BALKON ARKA DUVARI -->
+                <!-- PANEL 4 -->
 
-                    <rect
-                        x="560"
-                        y="515"
-                        width="365"
-                        height="165"
-                        fill="white"
-                    />
-
-                    <!-- PENCERE -->
-
-                    <rect
-                        x="670"
-                        y="575"
-                        width="180"
-                        height="105"
-                        fill="black"
-                    />
-
-
-                    <!-- 3. KAT BALKON ARKA DUVARI -->
-
-                    <rect
-                        x="560"
-                        y="785"
-                        width="365"
-                        height="190"
-                        fill="white"
-                    />
-
-                    <!-- PENCERE -->
-
-                    <rect
-                        x="670"
-                        y="845"
-                        width="180"
-                        height="130"
-                        fill="black"
-                    />
-
-                </mask>
-
-
-                <!-- ========================= -->
-                <!-- SAĞ BALKON MASKESİ          -->
-                <!-- ========================= -->
-
-                <mask
-                    id="maskBalconyRight"
-                    maskUnits="userSpaceOnUse"
+                <rect
+                    id="overlay4"
+                    class="panel-rect"
                     x="0"
                     y="0"
                     width="2047"
                     height="1364"
-                >
+                    fill="url(#pattern4)"
+                    mask="url(#maskBalconyRight)"
+                    visibility="hidden"
+                />
 
-                    <!-- 1. KAT -->
+            </svg>
 
-                    <rect
-                        x="1120"
-                        y="260"
-                        width="365"
-                        height="125"
-                        fill="white"
-                    />
-
-                    <rect
-                        x="1185"
-                        y="300"
-                        width="180"
-                        height="85"
-                        fill="black"
-                    />
-
-
-                    <!-- 2. KAT -->
-
-                    <rect
-                        x="1120"
-                        y="515"
-                        width="365"
-                        height="165"
-                        fill="white"
-                    />
-
-                    <rect
-                        x="1185"
-                        y="575"
-                        width="180"
-                        height="105"
-                        fill="black"
-                    />
-
-
-                    <!-- 3. KAT -->
-
-                    <rect
-                        x="1120"
-                        y="785"
-                        width="365"
-                        height="190"
-                        fill="white"
-                    />
-
-                    <rect
-                        x="1185"
-                        y="845"
-                        width="180"
-                        height="130"
-                        fill="black"
-                    />
-
-                </mask>
-
-            </defs>
-
-
-            <!-- ========================= -->
-            <!-- PANEL 1 SOL CEPHE          -->
-            <!-- ========================= -->
-
-            <rect
-                id="overlay1"
-                class="panel-rect"
-                x="0"
-                y="0"
-                width="2047"
-                height="1364"
-                fill="url(#pattern1)"
-                mask="url(#maskLeft)"
-                visibility="hidden"
-            />
-
-
-            <!-- ========================= -->
-            <!-- PANEL 2 SAĞ CEPHE          -->
-            <!-- ========================= -->
-
-            <rect
-                id="overlay2"
-                class="panel-rect"
-                x="0"
-                y="0"
-                width="2047"
-                height="1364"
-                fill="url(#pattern2)"
-                mask="url(#maskRight)"
-                visibility="hidden"
-            />
-
-
-            <!-- ========================= -->
-            <!-- PANEL 3 SOL BALKONLAR      -->
-            <!-- ========================= -->
-
-            <rect
-                id="overlay3"
-                class="panel-rect"
-                x="0"
-                y="0"
-                width="2047"
-                height="1364"
-                fill="url(#pattern3)"
-                mask="url(#maskBalconyLeft)"
-                visibility="hidden"
-            />
-
-
-            <!-- ========================= -->
-            <!-- PANEL 4 SAĞ BALKONLAR      -->
-            <!-- ========================= -->
-
-            <rect
-                id="overlay4"
-                class="panel-rect"
-                x="0"
-                y="0"
-                width="2047"
-                height="1364"
-                fill="url(#pattern4)"
-                mask="url(#maskBalconyRight)"
-                visibility="hidden"
-            />
-
-        </svg>
+        </div>
 
     </div>
 
@@ -940,6 +987,7 @@ SVG'nin viewBox'ı doğrudan house.jpg
 ========================================================= */
 
 const panelData = {
+
     1: {
         pattern: "pattern1",
         image: "patternImage1",
@@ -975,6 +1023,7 @@ const panelData = {
         name: "name4",
         scale: 110
     }
+
 };
 
 
@@ -1004,6 +1053,7 @@ for (let i = 1; i <= 4; i++) {
 
             const reader = new FileReader();
 
+
             reader.onload = function(e) {
 
                 const imageElement =
@@ -1017,20 +1067,11 @@ for (let i = 1; i <= 4; i++) {
                     );
 
 
-                /*
-                    Seçilen resmi ilgili
-                    panel desenine gönderiyoruz.
-                */
-
                 imageElement.setAttribute(
                     "href",
                     e.target.result
                 );
 
-
-                /*
-                    Paneli görünür yap
-                */
 
                 overlay.setAttribute(
                     "visibility",
@@ -1038,6 +1079,7 @@ for (let i = 1; i <= 4; i++) {
                 );
 
             };
+
 
             reader.readAsDataURL(file);
 
@@ -1060,12 +1102,14 @@ function changeScale(panelNumber) {
     const value =
         parseInt(slider.value);
 
+
     panelData[panelNumber].scale = value;
 
 
     document.getElementById(
         "scaleValue" + panelNumber
-    ).innerText = value + "px";
+    ).innerText =
+        value + "px";
 
 
     const pattern =
@@ -1080,10 +1124,6 @@ function changeScale(panelNumber) {
         );
 
 
-    /*
-        Panelin tekrar boyutu
-    */
-
     pattern.setAttribute(
         "width",
         value
@@ -1109,7 +1149,7 @@ function changeScale(panelNumber) {
 
 
 /* =========================================================
-   SADECE İLGİLİ PANELİ TEMİZLE
+   PANEL TEMİZLE
 ========================================================= */
 
 function clearPanel(panelNumber) {
@@ -1117,10 +1157,6 @@ function clearPanel(panelNumber) {
     const data =
         panelData[panelNumber];
 
-
-    /*
-        İlgili overlay'i kapat
-    */
 
     document
         .getElementById(data.overlay)
@@ -1130,10 +1166,6 @@ function clearPanel(panelNumber) {
         );
 
 
-    /*
-        İlgili panel resmini kaldır
-    */
-
     document
         .getElementById(data.image)
         .setAttribute(
@@ -1142,19 +1174,11 @@ function clearPanel(panelNumber) {
         );
 
 
-    /*
-        Dosya bilgisini temizle
-    */
-
     document
         .getElementById(data.name)
         .innerText =
-        "Panel seçilmedi";
+        "Seçilmedi";
 
-
-    /*
-        Dosya inputunu sıfırla
-    */
 
     document
         .getElementById(data.input)
@@ -1169,17 +1193,8 @@ function clearPanel(panelNumber) {
 
 function closeOrRedirect() {
 
-    /*
-        Yeni sekmede açıldıysa kapatmayı dene
-    */
-
     window.close();
 
-
-    /*
-        Tarayıcı kapatmaya izin vermezse
-        ana sayfaya gönder
-    */
 
     setTimeout(function() {
 
