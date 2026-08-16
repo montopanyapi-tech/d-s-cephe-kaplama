@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Montopan Bina Cephe Visualizer v14</title>
+<title>Montopan Dış Cephe Simülatörü</title>
 
 <style>
 
@@ -33,7 +33,9 @@ body {
     box-shadow: 0 10px 35px rgba(0,0,0,0.45);
 }
 
-/* ÜST BİLGİ */
+/* =====================================================
+   ÜST BİLGİ
+===================================================== */
 
 #info-bar {
     background: #0f172a;
@@ -51,10 +53,19 @@ body {
 .info-text {
     color: #cbd5e1;
     font-size: 11px;
+    line-height: 1.4;
 }
 
-.info-text strong {
+.simulator-title {
     color: #38bdf8;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.simulator-description {
+    color: #cbd5e1;
+    font-size: 10px;
 }
 
 /* =====================================================
@@ -305,9 +316,17 @@ input[type="file"] {
     <div id="info-bar">
 
         <div class="info-text">
-            💡 <strong>Montopan Dıs Cephe Kaplama Simulatörü
-.</strong>
-            Panel modellerini Bilgisayarınıza indirin.Dört farklı Panel modeli ile Dört faklı alana,Panel seç ve uygula veya sil degiştir.
+
+            <div class="simulator-title">
+                🏠 Montopan Dış Cephe Simülatörü
+            </div>
+
+            <div class="simulator-description">
+                Panel modellerini bilgisayarınıza indirin.
+                Dört farklı panel modeli ile dört farklı alana
+                panel seçin, uygulayın veya silerek değiştirin.
+            </div>
+
         </div>
 
         <button id="back-button" onclick="closeOrRedirect()">
@@ -697,13 +716,6 @@ input[type="file"] {
                             fill="white"
                         />
 
-                        <!--
-                            PENCERELER
-                            Maskeler 4px içeri alındı.
-                            Panelin pencere çerçevesine
-                            daha fazla yaklaşmasını sağlar.
-                        -->
-
                         <rect
                             x="324"
                             y="239"
@@ -808,7 +820,6 @@ input[type="file"] {
                             fill="black"
                         />
 
-
                         <rect
                             x="560"
                             y="515"
@@ -824,7 +835,6 @@ input[type="file"] {
                             height="97"
                             fill="black"
                         />
-
 
                         <rect
                             x="560"
@@ -874,7 +884,6 @@ input[type="file"] {
                             fill="black"
                         />
 
-
                         <rect
                             x="1120"
                             y="515"
@@ -890,7 +899,6 @@ input[type="file"] {
                             height="97"
                             fill="black"
                         />
-
 
                         <rect
                             x="1120"
