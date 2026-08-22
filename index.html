@@ -603,11 +603,9 @@ input[type="file"] {
             </div>
 
 
-            <!-- =================================================
-                 SOL PANELİN EN ALTINA EKLENEN KAYDET BUTONU
-            ================================================== -->
+            <!-- SOL PANELİN EN ALTINA EKLENEN KAYDET BUTONU -->
             <button class="save-button" onclick="saveDesign()">
-                📥 Tasarımı Kaydet (3000px PNG)
+                📥 Tasarımı Kaydet (PNG)
             </button>
 
 
@@ -1245,27 +1243,26 @@ function closeOrRedirect() {
 
 
 /* =========================================================
-   TASARIMI YÜKSEK ÇÖZÜNÜRLÜKLÜ PNG OLARAK KAYDET
+   TASARIMI KAYDET (DÜZELTİLMİŞ & OPTİMİZE EDİLMİŞ)
 ========================================================= */
 
 function saveDesign() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
-    const targetWidth = 3000;
-    const originalWidth = 2047;
-    const originalHeight = 1364;
-    const targetHeight = Math.round((originalHeight / originalWidth) * targetWidth);
+    // Orijinal çözünürlük baz alınarak optimize edildi (~2047px genişlik, dosya boyutu ideal seviyede)
+    const targetWidth = 2047;
+    const targetHeight = 1364;
 
     canvas.width = targetWidth;
     canvas.height = targetHeight;
 
     const baseImg = document.getElementById('base-house');
 
-    // 1. Önce arka plan bina görselini yüksek çözünürlükte çiz
+    // 1. Önce arka plan bina görselini çiz
     ctx.drawImage(baseImg, 0, 0, targetWidth, targetHeight);
 
-    // 2. SVG elementini kopyala ve pattern görsellerini eşitle
+    // 2. SVG verisini al ve pattern görsellerini eşitle
     const svgElement = document.getElementById('visualizer-svg');
     const svgClone = svgElement.cloneNode(true);
 
@@ -1287,12 +1284,19 @@ function saveDesign() {
 
     const img = new Image();
     img.onload = function() {
+        // Duvar dokusu ile kaplamanın doğru harmanlanması için multiply modu canvas'a uygulandı
+        ctx.globalCompositeOperation = 'multiply';
         ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+        
+        // Modu normale sıfırla
+        ctx.globalCompositeOperation = 'source-over';
+        
         URL.revokeObjectURL(blobURL);
 
+        // İndirme işlemini tetikle
         const link = document.createElement('a');
         link.download = 'montopan-dis-cephe-tasarimi.png';
-        link.href = canvas.toDataURL('image/png', 1.0);
+        link.href = canvas.toDataURL('image/png', 0.9); // Optimum sıkıştırma kalitesi
         link.click();
     };
     img.src = blobURL;
