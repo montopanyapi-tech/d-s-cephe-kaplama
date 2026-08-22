@@ -191,7 +191,7 @@ input[type="file"] {
 }
 
 /* =====================================================
-   GERİ DÖN
+   GERİ DÖN VE KAYDET BUTONLARI
 ===================================================== */
 
 #back-button {
@@ -208,6 +208,23 @@ input[type="file"] {
 
 #back-button:hover {
     background: #b91c1c;
+}
+
+.save-button {
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 11px;
+    width: 100%;
+    text-align: center;
+}
+
+.save-button:hover {
+    background: #059669;
 }
 
 /* =====================================================
@@ -585,6 +602,15 @@ input[type="file"] {
 
             </div>
 
+
+            <!-- =================================================
+                 SOL PANELİN EN ALTINA EKLENEN KAYDET BUTONU
+            ================================================== -->
+            <button class="save-button" onclick="saveDesign()">
+                📥 Tasarımı Kaydet (3000px PNG)
+            </button>
+
+
         </div>
 
 
@@ -702,41 +728,41 @@ input[type="file"] {
                     <mask
                         id="maskLeft"
                         maskUnits="userSpaceOnUse"
-                        x="0"
-                        y="0"
+                        x="254"
+                        y="172"
                         width="2047"
                         height="1364"
                     >
 
                         <rect
-                            x="145"
+                            x="210"
                             y="175"
-                            width="425"
+                            width="340"
                             height="950"
                             fill="white"
                         />
 
                         <rect
                             x="324"
-                            y="239"
-                            width="157"
+                            y="234"
+                            width="161"
                             height="142"
                             fill="black"
                         />
 
                         <rect
-                            x="324"
-                            y="559"
-                            width="157"
-                            height="147"
+                            x="323"
+                            y="544"
+                            width="160"
+                            height="143"
                             fill="black"
                         />
 
                         <rect
-                            x="324"
-                            y="869"
-                            width="157"
-                            height="147"
+                            x="322"
+                            y="856"
+                            width="161"
+                            height="143"
                             fill="black"
                         />
 
@@ -756,40 +782,43 @@ input[type="file"] {
                         height="1364"
                     >
 
+                        <!-- Sağ Cephe Ana Duvar Alanı -->
                         <rect
-                            x="1475"
-                            y="175"
-                            width="425"
-                            height="950"
+                            x="1487"
+                            y="178"
+                            width="306"
+                            height="953"
                             fill="white"
                         />
 
+                        <!-- Üst Kat Pencere Boşluğu -->
                         <rect
-                            x="1544"
-                            y="239"
+                            x="1552"
+                            y="235"
                             width="157"
                             height="142"
                             fill="black"
                         />
 
+                        <!-- Orta Kat Pencere Boşluğu -->
                         <rect
-                            x="1544"
-                            y="559"
-                            width="157"
-                            height="147"
+                            x="1553"
+                            y="544"
+                            width="163"
+                            height="140"
                             fill="black"
                         />
 
+                        <!-- Alt Kat Pencere Boşluğu -->
                         <rect
-                            x="1544"
-                            y="869"
-                            width="157"
-                            height="147"
+                            x="1553"
+                            y="856"
+                            width="165"
+                            height="145"
                             fill="black"
                         />
 
                     </mask>
-
 
                     <!-- =================================================
                          SOL BALKON MASKESİ
@@ -798,57 +827,57 @@ input[type="file"] {
                     <mask
                         id="maskBalconyLeft"
                         maskUnits="userSpaceOnUse"
-                        x="0"
-                        y="0"
+                        x="548"
+                        y="175"
                         width="2047"
                         height="1364"
                     >
 
+                        <!-- 1. ÜST KAT DUVARI VE PENCERESİ -->
                         <rect
-                            x="560"
-                            y="260"
-                            width="365"
+                            x="610"
+                            y="267"
+                            width="293"
                             height="125"
                             fill="white"
                         />
-
                         <rect
                             x="674"
-                            y="304"
-                            width="172"
-                            height="77"
+                            y="316"
+                            width="177"
+                            height="167"
                             fill="black"
                         />
 
+                        <!-- 2. ORTA KAT DUVARI VE PENCERESİ -->
                         <rect
-                            x="560"
-                            y="515"
-                            width="365"
-                            height="165"
+                            x="610"
+                            y="535"
+                            width="294"
+                            height="244"
                             fill="white"
                         />
-
                         <rect
                             x="674"
                             y="579"
-                            width="172"
-                            height="97"
+                            width="176"
+                            height="199"
                             fill="black"
                         />
 
+                        <!-- 3. ALT KAT DUVARI VE PENCERESİ -->
                         <rect
-                            x="560"
-                            y="785"
-                            width="365"
-                            height="190"
+                            x="610"
+                            y="810"
+                            width="296"
+                            height="274"
                             fill="white"
                         />
-
                         <rect
-                            x="674"
-                            y="849"
-                            width="172"
-                            height="122"
+                            x="670"
+                            y="853"
+                            width="179"
+                            height="225"
                             fill="black"
                         />
 
@@ -868,51 +897,51 @@ input[type="file"] {
                         height="1364"
                     >
 
+                        <!-- 1. ÜST KAT DUVARI VE PENCERESİ -->
                         <rect
-                            x="1120"
-                            y="260"
-                            width="365"
-                            height="125"
+                            x="1128"
+                            y="268"
+                            width="297"
+                            height="217"
                             fill="white"
                         />
-
                         <rect
-                            x="1189"
-                            y="304"
-                            width="172"
-                            height="77"
+                            x="1185"
+                            y="315"
+                            width="179"
+                            height="169"
                             fill="black"
                         />
 
+                        <!-- 2. ORTA KAT DUVARI VE PENCERESİ -->
                         <rect
-                            x="1120"
-                            y="515"
-                            width="365"
-                            height="165"
+                            x="1130"
+                            y="534"
+                            width="299"
+                            height="242"
                             fill="white"
                         />
-
                         <rect
-                            x="1189"
-                            y="579"
-                            width="172"
-                            height="97"
+                            x="1186"
+                            y="578"
+                            width="178"
+                            height="203"
                             fill="black"
                         />
 
+                        <!-- 3. ALT KAT DUVARI VE PENCERESİ -->
                         <rect
-                            x="1120"
-                            y="785"
-                            width="365"
-                            height="190"
+                            x="1131"
+                            y="806"
+                            width="295"
+                            height="265"
                             fill="white"
                         />
-
                         <rect
-                            x="1189"
-                            y="849"
-                            width="172"
-                            height="122"
+                            x="1188"
+                            y="854"
+                            width="178"
+                            height="220"
                             fill="black"
                         />
 
@@ -1212,6 +1241,61 @@ function closeOrRedirect() {
 
     }, 150);
 
+}
+
+
+/* =========================================================
+   TASARIMI YÜKSEK ÇÖZÜNÜRLÜKLÜ PNG OLARAK KAYDET
+========================================================= */
+
+function saveDesign() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const targetWidth = 3000;
+    const originalWidth = 2047;
+    const originalHeight = 1364;
+    const targetHeight = Math.round((originalHeight / originalWidth) * targetWidth);
+
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+
+    const baseImg = document.getElementById('base-house');
+
+    // 1. Önce arka plan bina görselini yüksek çözünürlükte çiz
+    ctx.drawImage(baseImg, 0, 0, targetWidth, targetHeight);
+
+    // 2. SVG elementini kopyala ve pattern görsellerini eşitle
+    const svgElement = document.getElementById('visualizer-svg');
+    const svgClone = svgElement.cloneNode(true);
+
+    for (let i = 1; i <= 4; i++) {
+        const patternImg = svgClone.querySelector('#patternImage' + i);
+        if (patternImg) {
+            const originalImageElement = document.getElementById('patternImage' + i);
+            const currentHref = originalImageElement.getAttribute('href');
+            if (currentHref) {
+                patternImg.setAttribute('href', currentHref);
+            }
+        }
+    }
+
+    const svgString = new XMLSerializer().serializeToString(svgClone);
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const URL = window.URL || window.webkitURL || window;
+    const blobURL = URL.createObjectURL(svgBlob);
+
+    const img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+        URL.revokeObjectURL(blobURL);
+
+        const link = document.createElement('a');
+        link.download = 'montopan-dis-cephe-tasarimi.png';
+        link.href = canvas.toDataURL('image/png', 1.0);
+        link.click();
+    };
+    img.src = blobURL;
 }
 
 </script>
